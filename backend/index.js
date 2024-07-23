@@ -4,7 +4,6 @@ import cors from "cors"
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import http from "http"
-import cloudinary from "cloudinary"
 import { Server } from "socket.io"
 import DisasterRoute from "./routes/disaster.routes.js"
 
@@ -19,11 +18,6 @@ const PORT = process.env.PORT || 8080;
 
 dotenv.config({
     path: "backend/.env"
-})
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.CLOUD_API_KEY,
-    api_secret: process.env.CLOUD_API_SECRET,
 })
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));

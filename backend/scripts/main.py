@@ -175,5 +175,4 @@ plt.xlabel('Probability (%)')
 plt.ylabel('Disaster Type')
 plt.title('Predicted Probabilities for Each Disaster Type')
 plt.show()
-
 print(f"Predicted disaster type: {predicted_disaster_type}")

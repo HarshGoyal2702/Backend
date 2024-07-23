@@ -8,4 +8,5 @@ const router = express.Router();
 router.post('/', authentication, newDisaster);
 // router.route('/:id').get().put(authentication, authorization,)
 router.get('/search/:id', disasterAnalyse);
+
 export default router;
