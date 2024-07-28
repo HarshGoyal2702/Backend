@@ -26,13 +26,13 @@ app.use(cors());
 app.use('/api/v1/disaster', DisasterRoute)
 
 server.listen(PORT, () => {
-    console.log(PORT)
+    console.log(`server is listening on port ${PORT}`)
     connectDB();
 });
-io.on('connection', (socket) => {
-    console.log('New client connected');
-    socket.on('disconnect', () => {
-        console.log('Client disconnected');
-    });
-});
+// io.on('connection', (socket) => {
+//     console.log('New client connected');
+//     socket.on('disconnect', () => {
+//         console.log('Client disconnected');
+//     });
+// });
 export default io;

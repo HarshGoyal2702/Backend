@@ -7,16 +7,16 @@ import catchAsyncError from "../middlewares/catchAsyncError.js";
 import { PythonShell } from "python-shell";
 export const newDisaster = async (req, res, next) => {
     try {
-        const { type, location, date, description, userId } = req.body;
+        // const { type, location, date, description, userId } = req.body;
         const satelliteImage = "";
         const aiImage = "";
-        const newDisaster = new Disaster({ type, location, date, description, satelliteImage, aiImage, postedBy: userId });
+        const newDisaster = new Disaster({ satelliteImage, aiImage});
         await newDisaster.save();
-        const user = await userModel.findById(userId);
-        await user.posts.push(newDisaster._id);
-        await user.save();
+        // const user = await userModel.findById(userId);
+        // await user.posts.push(newDisaster._id);
+        // await user.save();
         // creating alert for disaster
-        io.emit('newDisaster', newDisaster);
+        // io.emit('newDisaster', newDisaster);
         res.status(201).json({
             success: true,
             data: newDisaster
@@ -132,29 +132,29 @@ export const disasterAnalyse = catchAsyncError(async (req, res, next) => {
         console.log("ERROR", error)
     }
 
-    io.emit('notification', (socket) => {
-        socket.emit('notification', {
-            message: `AI/ML Model Prediction: ${modelDescription} \n\n AI Generated Image
-            ${aiImage} \n\n Weather Prediction: ${finalData} \n\n Disaster Location
-            ${disasterLocation} \n\n Disaster Image: ${imageData}`
-        })
-    })
-    const disaster = await Disaster.create({
-        disaster: modelDescription,
-        location: location,
-        latitude: lat,
-        longitude: lon,
-        satelliteImage: {
-            url: "imageData",
-        },
-        aiImage: {
-            url: "aiImage",
-        },
-        postedBy: "Prediction Model"
-    })
+    // io.emit('notification', (socket) => {
+    //     socket.emit('notification', {
+    //         message: `AI/ML Model Prediction: ${modelDescription} \n\n AI Generated Image
+    //         ${aiImage} \n\n Weather Prediction: ${finalData} \n\n Disaster Location
+    //         ${disasterLocation} \n\n Disaster Image: ${imageData}`
+    //     })
+    // })
+    // const disaster = await Disaster.create({
+    //     disaster: modelDescription,
+    //     location: location,
+    //     latitude: lat,
+    //     longitude: lon,
+    //     satelliteImage: {
+    //         url: "imageData",
+    //     },
+    //     aiImage: {
+    //         url: "aiImage",
+    //     },
+    //     postedBy: "Prediction Model"
+    // })
     return res.status(200).json({
         success: true,
-        data: disaster,
+        // data: disaster,
         weather: finalData,
     })
 
